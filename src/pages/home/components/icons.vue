@@ -1,6 +1,6 @@
 <template>
     <div class="icons">
-        <swiper>
+        <swiper :options="swiperOption">
         <swiper-slide v-for="(page, index) of pages" :key="index">
         <div class="icon" v-for="item of page" :key="item.id">
             <div class="icon-img">
@@ -17,51 +17,20 @@
 <script>
 export default {
     name: "HomeIcons",
-    data() {
+    props:{
+        list: Array
+    },
+    data(){
         return {
-            iconList: [{
-                id:'0001',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/flight.png',
-                desc: '机票'
-            },{
-                id:'0002',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/package.png',
-                desc: '度假'
-            },{
-                id:'0003',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/train.png',
-                desc: '火车票'
-            },{
-                id:'0004',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/piao.png',
-                desc: '景点门票'
-            },{
-                id:'0005',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/flight.png',
-                desc: '机票'
-            },{
-                id:'0006',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/package.png',
-                desc: '度假'
-            },{
-                id:'0007',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/train.png',
-                desc: '火车票'
-            },{
-                id:'0008',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/piao.png',
-                desc: '景点门票'
-            },{
-                id:'0009',
-                imgUrl: '//s.qunarzz.com/homenode/images/touchheader/group.png',
-                desc: '特惠酒店'
-            }]
+            swiperOption: {
+                autoplay: false
+            }
         }
     },
     computed: {
         pages () {
             const pages = []
-            this.iconList.forEach((item,index) => {
+            this.list.forEach((item,index) => {
                 const page = Math.floor(index / 8)
                 if (!pages[page]){
                     pages[page] = []
@@ -81,6 +50,9 @@ export default {
     .icons >>> .swiper-container{
         height: 0
         padding-bottom: 50%
+    }
+    .icons{
+        margin-top: .1rem
     }
     .icon{
         position: relative
